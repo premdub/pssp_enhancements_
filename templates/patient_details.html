@@ -213,7 +213,7 @@ the second container is for vitals, the third container is for allergies, and th
                                         <h3> Medications </h3>
                                         <hr>
                                         <table class="table table-hover table-dark">
-                                      
+                                
 
                                             {% for row in patient_medications %}
             
@@ -259,9 +259,166 @@ the second container is for vitals, the third container is for allergies, and th
                                                 </div>
                                             </div>
 
+                                            <!-- NEW MODEL FOR DELETING CONDITION -->
+                                            <div id="modaldeletecondition{{row.id}}" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Delete Medication</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{url_for('delete_medication')}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="mrn">MRN</label>
+                                                                        <input type="text" class="form-control" name="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                    <label for="med_ndc">Medication Code To Delete</label>
+                                                                        <input type="text" class="form-control" name="med_ndc" value="{{row.med_ndc}}" readonly>
+                                                                    <button class="btn btn-primary" type="submit" style="margin-top: 1em">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+            
+            
+                                            
 
-
-
+                                            <div class="col md-6">
+                                                <h3> Procedures </h3>
+                                                <hr>
+                                                <table class="table table-hover table-dark">
+                    
+                                                    {% for row in patient_procedures %}
+                    
+                                                    <tr>
+                    
+                                                        <td> 
+                                                            {{row.cpt_code}} 
+                                                            <br/>
+                                                            {% for db_procedure in db_procedures %}
+                                                                {% if row.cpt_code == db_procedure.cpt_code %}
+                                                                        {{db_procedure.cpt_description}}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <br />
+                                                            <a href="/update_procedure/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaleditprocedure{{row.id}}">Edit</a>
+                                                            <a href="/delete_procedure/" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaldeleteprocedure{{row.id}}">Delete</a>
+                                                        </td>
+                                                    </tr>
+                    
+                    
+                                                    <!-- NEW MODEL WINDOW FOR ADDING PROCEDURE -->
+                                                    <div id="addprocedure" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Add New Procedure</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{url_for('add_procedure')}}" method="POST">
+                                                                        <div class="form-group">
+                                                                            <label for="mrn">MRN</label>
+                                                                                <input type="text" class="form-control" name="mrn" id="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                            <label for="cpt_code">CPT Code</label>
+                                                                            <select class="form-control" name="cpt_code" id="cpt_code">
+                                                                                {% for row in db_procedures %}
+                                                                                    <option value="{{row.cpt_code}}" >{{row.cpt_description}} : {{row.cpt_code}} </option>
+                                                                                {% endfor %}
+                                                                            </select>
+                                                                            <button class="btn btn-primary" type="submit" style="margin-top: 1em">Insert</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                    
+                                                    <!-- NEW MODEL FOR DELETING CONDITION -->
+                                                    <div id="modaldeleteprocedure{{row.id}}" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Delete Procedure</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{url_for('delete_procedure')}}" method="POST">
+                                                                        <div class="form-group">
+                                                                            <label for="mrn">MRN</label>
+                                                                                <input type="text" class="form-control" name="mrn" value="{{patient_details.mrn}}" readonly>
+                                                                            <label for="cpt_code">CPT Code To Delete</label>
+                                                                                <input type="text" class="form-control" name="cpt_code" value="{{row.cpt_code}}" readonly>
+                                                                            <button class="btn btn-primary" type="submit" style="margin-top: 1em">Delete</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                    
+                    
+                                                    <!-- MODEL WINDOW FOR EDITING -->
+                    
+                                                    <div id="modaleditprocedure{{row.id}}" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">Update Information</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{url_for('update_procedure')}}" method="POST">
+                    
+                                                                    <div class="form-group">
+                                                                        <label for="mrn">MRN</label>
+                                                                        <input type="text" class="form-control" name="mrn" value="{{row.mrn}}" readonly>
+                                                                    </div>
+                    
+                                                                    <div class="form-group">
+                                                                        <label for="mrn">ROW ID</label>
+                                                                        <input type="text" class="form-control" name="id" value="{{row.id}}" readonly>
+                                                                    </div>
+                    
+                                                                    <div class="form-group">
+                                                                        <label for="mrn">EXISTING PROCEDURE</label>
+                                                                        <input type="text" class="form-control" name="id" value="{{row.cpt_code}}" readonly>
+                                                                    </div>
+                    
+                                                                    <!-- create a drop down that shows db_conditions -->
+                                                                    <div class="form-group">
+                                                                        <label for="cpt_code">Procedure Code</label>
+                                                                        <select class="form-control" name="cpt_code">
+                                                                            {% for row in db_procedure %}
+                                                                            <!-- default option value is none -->
+                                                                                <option value="{{row.cpt_code}}" >{{row.cpt_code}} : {{row.cpt_description}}</option>
+                                                                            {% endfor %}
+                                                                        </select>
+                                                                    </div>
+                    
+                                                                    <div class="form-group">
+                                                                        <button class="btn btn-primary" type="submit">Update</button>
+                                                                    </div>
+                    
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                    
+                                                        {% endfor %}
+                    
+                    
+                                                </table>
+                                            </div>
+                    
+                                        </div>
+                                    </div>
 
 
                                             {% endfor %}
@@ -272,7 +429,7 @@ the second container is for vitals, the third container is for allergies, and th
             
                                         </table>
                                     </div>
-
+                                    
             
                                     <div class="col md-6">
                                         <h3> Procedures </h3>

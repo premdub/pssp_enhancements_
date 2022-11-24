@@ -64,6 +64,11 @@
       }
     </style>
 
+
+
+    <span id="ctl00_ContentPlaceHolder1_pmLogin_lblMessage"><p style="text-align:center;font-size:18pt;margin:0pt 170pt 90pt 350pt;">
+      <span style="color:#C00000;background-color:transparent;font-family:Arial;font-size:39pt;font-weight:bold;font-style:normal;">Center for Patient Self Service Portal (PssP)</span></p><p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"><span style="color:#000000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:normal;font-style:normal;">&nbsp;</span></p><p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+    
     
     <!-- Custom styles for this template -->
     <!-- <link href="signin.css" rel="stylesheet"> -->
@@ -72,8 +77,12 @@
   </head>
   <body class="text-center">
     
-<main class="form-signin w-100 m-auto">
-
+<main class="form-signin w-300 m-auto">
+  <div id="DivLogin" class="card">
+    <span style="color:#F00000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:bold;font-style:normal;">FOR EMERGENCIES, DIAL 911 <br></span>
+    <h1 class="card-header bg-primary">Please sign-in to a existing account</h1>
+    </p><p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0ptpt;">
+    </div>
   <form action="{{ url_for('login') }}" method="post">
     <h1 class="h3 mb-3 fw-normal">Login</h1>
 

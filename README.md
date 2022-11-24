@@ -1,12 +1,14 @@
 # pssp_enhancements
 HHA504_assignment_9
+
 CRUD PssP Enhancements
+
 Further enhancements to the 'Patient Self Service Portal' with customization of the landing, login, registration, and account pages.
 
 Changes Include:
 
-Customized landing page that includes new logo
-customized login and registration pages matching the landing page design
+Customized landing page
+customized login and registration pages matching the landing page 
 New user: 'Provider' with own registration page and patient editing capabilities
 New redesigned account page that includes the ability to edit and delete the username and email
 Account page added to heading tab
@@ -35,7 +37,7 @@ from dashboard.blueprint import dashboard_blueprint
 Requirements
 Visual Studio Code
 MySQLWorkbench
-Azure Database for MySQL flexible server
+GCP Database for MySQL flexible server
 Web Browser
 Resources
 Initial Database Setup

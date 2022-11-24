@@ -51,6 +51,7 @@ Useful Designing Tool
 Reference Templates
 
 Important Notes
+
 Make sure base code is down first
 Then can adjust css files for visualizations
 Finally can focus on proper app routing
